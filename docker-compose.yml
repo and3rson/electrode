@@ -1,0 +1,22 @@
+version: '3.0'
+services:
+  app:
+    image: electrode
+    network_mode: "bridge"
+    environment:
+      PYTHONUNBUFFERED: 0
+    command: ./manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./electrode:/app/electrode
+    links:
+      - postgres
+    ports:
+      - 8000:8000
+  postgres:
+    image: postgres:9.6
+    network_mode: "bridge"
+    environment:
+      POSTGRES_DB: electrode
+      POSTGRES_USER: electrode
+      POSTGRES_PASSWORD: electrode
+
